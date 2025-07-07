@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/sidebar"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
-import { MENU } from "@/constants/endpoints";
+import { MENU, PROTECTED_MENU } from "@/constants/endpoints";
+import Link from "next/link";
 
 
 export default function SidebarComponent() {
@@ -26,19 +27,31 @@ export default function SidebarComponent() {
               {MENU.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SignedIn>
+                {PROTECTED_MENU.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SignedIn>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SignedIn>
-              <UserButton/>
+            <UserButton />
           </SignedIn>
           <SignedOut>
             <SignInButton>
@@ -48,7 +61,7 @@ export default function SidebarComponent() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  
+
 
   )
 }

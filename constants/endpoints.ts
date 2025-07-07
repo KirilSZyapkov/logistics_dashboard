@@ -16,6 +16,11 @@ export const MENU = [
     url: "/offers",
     icon: BookMarked,
   },
+  
+]
+
+export const PROTECTED_MENU = [
+  
   {
     title: "Create Shipment",
     url: "/create-shipment",
