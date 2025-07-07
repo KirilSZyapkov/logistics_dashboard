@@ -1,9 +1,49 @@
-import { currentUser } from "@clerk/nextjs/server";
+"use client";
 
+import { useUser } from "@clerk/nextjs";
+import { shipmentSchema, Shipment } from "@/lib/validation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-export default async function CreateShipmentPage() {
+export default function CreateShipmentPage() {
+  const form = useForm<z.infer<typeof shipmentSchema>>({
+    resolver: zodResolver(shipmentSchema),
+    defaultValues: {
+      createdBy: "",
+      clientName: "",
+      orderNumber: "",
+      tourNumber: "",
+      transportCompany: "",
+      truckNumber: "",
+      price: "",
+      loadingFrom: "",
+      deliveryTo: "",
+      loadingDate: "",
+      deliveryDate: "",
+    },
+  });
 
-  const user = await currentUser();
+  const {user, isLoaded} =  useUser();
+
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading...</p>
+      </div>
+    );
+  };
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
@@ -13,11 +53,171 @@ export default async function CreateShipmentPage() {
     );
   };
 
+  
+
+  async function onFormSubmit(values: z.infer<typeof shipmentSchema>) {
+    console.log(values);
+    
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Create Shipment Page</h1>
-      <p className="text-gray-600">This is the create shipment page content.</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-2 w-full">
+      <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-6">
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Shipment</h1>
+        <Form {...form}>
+          <form
+            className="space-y-4"
+            onSubmit={form.handleSubmit(onFormSubmit)}
+          >
+            <input
+              type="hidden"
+              {...form.register("createdBy")}
+              value={user.id}
+            />
+            <FormField
+              control={form.control}
+              name="clientName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Client Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Client Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="orderNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Order Number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Order Number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tourNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tour Number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Tour Number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="transportCompany"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Transport Company</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Transport Company" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="truckNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Truck Number</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Truck Number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="Price" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="loadingFrom"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Loading From</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Loading From" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="deliveryTo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Delivery To</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Delivery To" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <FormField
+                control={form.control}
+                name="loadingDate"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Loading Date</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="deliveryDate"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Delivery Date</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting
+                ? "Creating..."
+                : "Create Shipment"}
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }
