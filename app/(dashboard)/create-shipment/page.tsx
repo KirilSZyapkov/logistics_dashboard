@@ -55,7 +55,7 @@ export default function CreateShipmentPage() {
 
   
 
-  async function onFormSubmit(values: z.infer<typeof shipmentSchema>) {
+  async function onSubmit(values: z.infer<typeof shipmentSchema>) {
     console.log(values);
     
   }
@@ -67,7 +67,7 @@ export default function CreateShipmentPage() {
         <Form {...form}>
           <form
             className="space-y-4"
-            onSubmit={form.handleSubmit(onFormSubmit)}
+            onSubmit={form.handleSubmit(onSubmit)}
           >
             <input
               type="hidden"
@@ -146,7 +146,7 @@ export default function CreateShipmentPage() {
                 <FormItem>
                   <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Price" {...field} />
+                    <Input placeholder="Price" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -208,7 +208,7 @@ export default function CreateShipmentPage() {
             </div>
             <Button
               type="submit"
-              className="w-full"
+              className="w-full cursor-pointer"
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting
