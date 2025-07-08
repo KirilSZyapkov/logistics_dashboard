@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function CreateShipmentPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof shipmentSchema>>({
     resolver: zodResolver(shipmentSchema),
     defaultValues: {
-      createdBy: "",
       clientName: "",
       orderNumber: "",
       tourNumber: "",
@@ -56,6 +57,8 @@ export default function CreateShipmentPage() {
   
 
   async function onSubmit(values: z.infer<typeof shipmentSchema>) {
+    console.log("hi");
+    
     console.log(values);
     
   }
@@ -69,11 +72,6 @@ export default function CreateShipmentPage() {
             className="space-y-4"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <input
-              type="hidden"
-              {...form.register("createdBy")}
-              value={user.id}
-            />
             <FormField
               control={form.control}
               name="clientName"
@@ -208,10 +206,11 @@ export default function CreateShipmentPage() {
             </div>
             <Button
               type="submit"
+              variant="default"
               className="w-full cursor-pointer"
-              disabled={form.formState.isSubmitting}
+              disabled={isLoading}
             >
-              {form.formState.isSubmitting
+              {isLoading
                 ? "Creating..."
                 : "Create Shipment"}
             </Button>

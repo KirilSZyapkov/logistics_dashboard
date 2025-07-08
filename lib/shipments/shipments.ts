@@ -1,3 +1,5 @@
+"use server";
+
 import { shipmentsTable } from "@/drizzle/schema";
 import { Shipment } from "../validation";
 
