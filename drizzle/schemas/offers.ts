@@ -8,7 +8,7 @@ export const offerStatus = pgEnum("offer_status", [
 
 export const offersTable = pgTable("offers", {
   id: serial("id").primaryKey(),
-  createdBy: varchar("created_by").notNull().unique(),
+  createdBy: varchar("created_by").notNull(),
   clientName: varchar("client_name", { length: 120 }).notNull(),
   contactPerson: varchar("contact_person", { length: 120 }),
   phone: varchar("phone", { length: 40 }),

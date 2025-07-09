@@ -65,6 +65,7 @@ export default function CreateShipmentPage() {
         throw new Error("Please fill in all fields.");
       }
       const response = await createShipment(values);
+      alert("Shipment created successfully!");
       form.reset();
       setIsLoading(false);
     } catch (error: any) {

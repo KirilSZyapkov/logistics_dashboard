@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { shipmentsTable } from "@/drizzle/schemas/shipments";
+import { shipmentsTable,shipmentStatus } from "@/drizzle/schemas/shipments";
 
 export default function TablaData({shipment}: {shipment: typeof shipmentsTable.$inferSelect}) {
+
+  const statusList = shipmentStatus.enumValues;
+  
 
   function btClick() {
     alert("Button clicked!");
@@ -20,6 +23,8 @@ export default function TablaData({shipment}: {shipment: typeof shipmentsTable.$
       <TableCell>{shipment.loadingFrom}</TableCell>
       <TableCell>{shipment.deliveryTo}</TableCell>
       <TableCell>{shipment.price}</TableCell>
+      <TableCell><Button onClick={()=>btClick()} className="cursor-pointer">Click</Button></TableCell>
+      <TableCell><Button onClick={()=>btClick()} className="cursor-pointer">Click</Button></TableCell>
       <TableCell><Button onClick={()=>btClick()} className="cursor-pointer">Click</Button></TableCell>
     </TableRow>
   )
