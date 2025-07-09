@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "@/services/neon/db";
 import { shipmentsTable } from "@/drizzle/schema";
-import { auth } from "@clerk/nextjs/server";
+import { auth, getAuth } from "@clerk/nextjs/server";
 
 
 export async function GET() {
@@ -15,17 +15,19 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const {userId} = await auth();
+  const { userId } = getAuth(req);
+
   if (!userId) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
+
   const body = await req.json();
-  const data = body.data;
-  data.createdBy = userId;
+
+  body.createdBy = userId;
   const createdShipment = await db
-  .insert(shipmentsTable)
-  .values(data)
-  .returning();
+    .insert(shipmentsTable)
+    .values(body)
+    .returning();
 
   if (!createdShipment) {
     return NextResponse.json({ message: "Failed to create shipment" }, { status: 500 });

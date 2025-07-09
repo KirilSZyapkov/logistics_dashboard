@@ -1,4 +1,4 @@
-import { integer, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { integer, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const shipmentStatus = pgEnum("shipment_status", [
   "pending",
@@ -9,7 +9,7 @@ export const shipmentStatus = pgEnum("shipment_status", [
 
 export const shipmentsTable = pgTable('shipments', {
   id: uuid().primaryKey().defaultRandom(),
-  createdBy: text("createdBy").notNull().unique(),
+  createdBy: varchar("createdBy").notNull().unique(),
   clientName: text("clientName").notNull(),
   orderNumber: text("orderNumber").notNull().unique(),
   tourNumber: text("tourNumber").notNull(),

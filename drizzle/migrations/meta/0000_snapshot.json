@@ -1,0 +1,263 @@
+{
+  "id": "e629e61b-f2d1-4872-bc5d-4e3d9c2603da",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.shipments": {
+      "name": "shipments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "clientName": {
+          "name": "clientName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orderNumber": {
+          "name": "orderNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tourNumber": {
+          "name": "tourNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transportCompany": {
+          "name": "transportCompany",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "truckNumber": {
+          "name": "truckNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "loadingFrom": {
+          "name": "loadingFrom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deliveryTo": {
+          "name": "deliveryTo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "loadingDate": {
+          "name": "loadingDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deliveryDate": {
+          "name": "deliveryDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pending'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "shipments_createdBy_unique": {
+          "name": "shipments_createdBy_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "createdBy"
+          ]
+        },
+        "shipments_orderNumber_unique": {
+          "name": "shipments_orderNumber_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "orderNumber"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.offers": {
+      "name": "offers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "client_name": {
+          "name": "client_name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contact_person": {
+          "name": "contact_person",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "destination": {
+          "name": "destination",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cargo_details": {
+          "name": "cargo_details",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_quote": {
+          "name": "price_quote",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        },
+        "refusal_reason": {
+          "name": "refusal_reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "offers_created_by_unique": {
+          "name": "offers_created_by_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "created_by"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.shipment_status": {
+      "name": "shipment_status",
+      "schema": "public",
+      "values": [
+        "pending",
+        "in_transit",
+        "delivered",
+        "delayed"
+      ]
+    },
+    "public.offer_status": {
+      "name": "offer_status",
+      "schema": "public",
+      "values": [
+        "pending",
+        "accepted",
+        "rejected"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

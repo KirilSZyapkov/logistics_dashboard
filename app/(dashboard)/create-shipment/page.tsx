@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { createShipment } from "@/lib/shipments/shipments";
 
 export default function CreateShipmentPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +36,7 @@ export default function CreateShipmentPage() {
     },
   });
 
-  const {user, isLoaded} =  useUser();
+  const { user, isLoaded } = useUser();
 
   if (!isLoaded) {
     return (
@@ -54,13 +55,25 @@ export default function CreateShipmentPage() {
     );
   };
 
-  
+
 
   async function onSubmit(values: z.infer<typeof shipmentSchema>) {
-    console.log("hi");
-    
-    console.log(values);
-    
+    setIsLoading(true);
+    try {
+      const response = await createShipment(values);
+      console.log("create shipments page 63:", response);
+
+      alert("Shipment created successfully!");
+      form.reset();
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error("Error creating shipment:", error);
+      alert(error.message);
+      setIsLoading(false);
+      return;
+
+    }
+
   }
 
   return (

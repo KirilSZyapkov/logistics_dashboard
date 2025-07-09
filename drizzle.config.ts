@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
-    out: './lib/neon',
+    out: './drizzle/migrations',
     schema: './drizzle/schema.ts',
     strict: true,
     verbose: true,
