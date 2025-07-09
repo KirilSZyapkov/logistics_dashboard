@@ -20,7 +20,7 @@ export default async function SidebarComponent() {
 
   return (
 
-    <Sidebar>
+    <Sidebar className="w-50">
       <SidebarContent className="justify-between">
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

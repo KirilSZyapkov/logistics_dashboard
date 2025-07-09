@@ -34,13 +34,16 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+
           <SidebarProvider>
             <SidebarComponent />
-
-            <SidebarTrigger />
+            <div className="block md:hidden">
+              <SidebarTrigger />
+            </div>
             {children}
 
           </SidebarProvider>
+
         </body>
       </html>
     </ClerkProvider>

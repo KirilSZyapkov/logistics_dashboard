@@ -60,10 +60,11 @@ export default function CreateShipmentPage() {
   async function onSubmit(values: z.infer<typeof shipmentSchema>) {
     setIsLoading(true);
     try {
+      
+      if(values.clientName === "" || values.orderNumber === "" || values.tourNumber === "" || values.transportCompany === "" || values.truckNumber === "" || values.price === "" || values.loadingFrom === "" || values.deliveryTo === "" || values.loadingDate === "" || values.deliveryDate === "") {
+        throw new Error("Please fill in all fields.");
+      }
       const response = await createShipment(values);
-      console.log("create shipments page 63:", response);
-
-      alert("Shipment created successfully!");
       form.reset();
       setIsLoading(false);
     } catch (error: any) {

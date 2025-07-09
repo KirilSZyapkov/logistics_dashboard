@@ -23,8 +23,7 @@ export async function getAllShipments(){
 export async function getShipmentById(id: string) {}
 
 export async function createShipment(data: Shipment) {
-  console.log("Creating shipment 25:", data);
-  
+   
   const response = await fetch("/api/shipments", {
     method:"POST",
     headers: {
