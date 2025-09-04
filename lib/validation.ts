@@ -27,3 +27,12 @@ export const offersSchema = z.object({
 });
 
 export type Offers = z.infer<typeof offersSchema>;
+
+export const userSchema = z.object({
+  clerkId: z.string().min(1, {message: "User Clerk ID is required"}),
+  name: z.string().min(1, {message: "Name is required"}),
+  email: z.string().email({message: "Invalid email address"}),
+  role: z.enum(["staff", "team_leader", "cio"]).optional(),
+});
+
+export type User = z.infer<typeof userSchema>;

@@ -1,6 +1,6 @@
 
 export async function getCurrentUser(userId: string) {
-  const response = await fetch(`/api/users?userId=${userId}`,
+  const response = await fetch(`/api/user?userId=${userId}`,
   {
     method: "GET",
     headers: {
