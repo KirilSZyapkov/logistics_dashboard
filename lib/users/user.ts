@@ -1,6 +1,8 @@
+import { userTables } from "@/drizzle/schemas/users";
+import { apiFetch } from "@/hooks/apiFetch";
 
-export async function getCurrentUser(userId: string) {
-  const response = await fetch(`/api/user?userId=${userId}`,
+export async function getCurrentUser(userId: string): Promise<typeof userTables.$inferSelect> {
+  const response = await apiFetch<typeof userTables.$inferSelect>(`/api/user?userId=${userId}`,
   {
     method: "GET",
     headers: {
@@ -9,10 +11,8 @@ export async function getCurrentUser(userId: string) {
     credentials: "include",
     cache: "no-store"
   });
-  if(!response.ok) throw new Error("Failed to fetch current user");
+  if(!response) throw new Error("Failed to fetch current user");
 
-  const user = await response.json();
-
-  return user;
+ return response;
 };
 
