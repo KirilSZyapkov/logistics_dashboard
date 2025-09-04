@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { getCurrentUser } from "./users/user";
+import { getCurrentUser } from "../users/user";
 import { userTables } from "@/drizzle/schemas/users";
 
 export async function getUser(): Promise<typeof userTables.$inferSelect> {
