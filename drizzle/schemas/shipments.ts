@@ -20,7 +20,7 @@ export const shipmentsTable = pgTable('shipments', {
   deliveryTo: text("deliveryTo").notNull(),
   loadingDate: text("loadingDate"),
   deliveryDate: text("deliveryDate"),
-  status: text("status").notNull().default('pending'),
+  status: text("status").default('pending'),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 })

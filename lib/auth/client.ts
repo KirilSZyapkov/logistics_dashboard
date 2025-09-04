@@ -3,11 +3,15 @@
 import { useUser } from "@clerk/nextjs";
 import { apiFetch } from "@/hooks/apiFetch";
 import { userTables } from "@/drizzle/schemas/users";
+import { useEffect } from "react";
 
 export function getCurrentUser() {
   const {user, isLoaded, isSignedIn} = useUser();
   if(!isLoaded || !isSignedIn || !user) return null;
 
+  useEffect(()=>{
+    
+  },[])
   const response = apiFetch<typeof userTables.$inferSelect>(`/api/user?userId=${user.id}`, {
     method: "GET",
     headers: {

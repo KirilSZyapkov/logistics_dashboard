@@ -12,6 +12,7 @@ export const userTables = pgTable("users", {
   name: varchar("name", {length: 120}).default("User"),
   email: varchar("email", {length: 120}).notNull().unique(),
   role: userRoles("role").default("staff").notNull(),
+  organization: varchar("organization", {length: 120}).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

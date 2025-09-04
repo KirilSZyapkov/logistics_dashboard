@@ -5,6 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import SidebarComponent from "@/components/shared/SidebarComponent";
+import SyncUser from "@/components/shared/SyncUser";
 
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
             <div className="block md:hidden">
               <SidebarTrigger />
             </div>
+            <SyncUser/>
             {children}
 
           </SidebarProvider>

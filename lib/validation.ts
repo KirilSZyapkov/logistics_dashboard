@@ -33,6 +33,7 @@ export const userSchema = z.object({
   name: z.string().min(1, {message: "Name is required"}),
   email: z.string().email({message: "Invalid email address"}),
   role: z.enum(["staff", "team_leader", "cio"]).optional(),
+  organization: z.string().min(1, {message: "Organization is required"}),
 });
 
 export type User = z.infer<typeof userSchema>;
