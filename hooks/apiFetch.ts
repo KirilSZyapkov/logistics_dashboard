@@ -9,11 +9,14 @@ export async function apiFetch<T>(
       credentials: "include",
       ...options
     });
-    if (!res.ok) throw new Error(errorMessage);
+    if (!res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      return null;
+    }
 
-    const data = await res.json();
 
-    return data;
   } catch (error: unknown) {
     console.log(error);
     return null;

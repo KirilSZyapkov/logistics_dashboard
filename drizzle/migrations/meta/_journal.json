@@ -15,6 +15,13 @@
       "when": 1752090526513,
       "tag": "0001_nosy_thing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757072148409,
+      "tag": "0002_great_supreme_intelligence",
+      "breakpoints": true
     }
   ]
 }

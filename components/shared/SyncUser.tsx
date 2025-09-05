@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { userSchema } from "@/lib/validation";
 import { apiFetch } from "@/hooks/apiFetch";
+import { getCurrentUser } from "@/lib/auth/client";
 
 type SyncData = {
   name: string;
@@ -28,19 +29,16 @@ type SyncUserProps = {
 };
 
 export default function SyncUser() {
-  const { isSignedIn, user } = useUser();
+  
+  const  loadedUser  = getCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<SyncData>({
     defaultValues: {
       name: "",
     },
   });
-
-  useEffect(()=>{
-    async function fetch(){
-      const res = await apiFetch
-    }
-  },[user?.id]);
+   console.log(loadedUser);
+   
 
   // if (!isSignedIn) return null;
 
@@ -49,6 +47,7 @@ export default function SyncUser() {
     alert(values.name);
   };
 
+  if (!loadedUser) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
