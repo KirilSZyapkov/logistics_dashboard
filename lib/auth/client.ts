@@ -9,9 +9,6 @@ export function getCurrentUser() {
   const [loadedUser, setLoadedUser] = useState<null | typeof userTables.$inferSelect>(null);
   const { isSignedIn, user } = useUser();
 
-  console.log("getCurrentUser 12",user);
-  
-  
   useEffect(() => {
     async function fetch() {
       if (!isSignedIn || !user) return null;

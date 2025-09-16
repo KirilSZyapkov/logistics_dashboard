@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -14,52 +14,25 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { userSchema } from "@/lib/validation";
-import { apiFetch } from "@/hooks/apiFetch";
 import { getCurrentUser } from "@/lib/auth/client";
 import { User } from "@/lib/validation";
 import { createUser } from "@/lib/users/user";
-import { userTables } from "@/drizzle/schemas/users";
 
 type SyncData = {
   name: string;
 };
 
 export default function SyncUser() {
- 
-  // const loadedUser = getCurrentUser();
-  const [loadedUser, setLoadedUser] = useState<null | typeof userTables.$inferSelect>(null);
+
+  const loadedUser = getCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
-  const { isSignedIn, user } = useUser();
-  
-  useEffect(() => {
-      async function fetch() {
-        if (!isSignedIn || !user) return null;
-        const response = await apiFetch<typeof userTables.$inferSelect>(`/api/user?userId=${user.id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          credentials: "include",
-          cache: "no-store"
-        });
-        if(response){
-          setLoadedUser(response);
-        } else {
-          setLoadedUser(null);
-        }
-      };
-      fetch();
-    }, [isSignedIn, user?.id]);
+  const { user } = useUser();  
 
   const form = useForm<SyncData>({
     defaultValues: {
       name: "",
     },
   });
-
-  console.log("syncUser 61", user);
-  console.log("syncUser 61", loadedUser);
 
   const handleSync = async (values: SyncData) => {
 
@@ -71,9 +44,6 @@ export default function SyncUser() {
       role: "staff"
     };
 
-    console.log("syncUser 51", newUser);
-
-
     try {
       setIsLoading(true);
       const newCreatedUser = await createUser(newUser);
@@ -84,7 +54,6 @@ export default function SyncUser() {
       console.error("Error creating user:", error);
     }
   };
-  console.log(loadedUser);
 
   if (loadedUser) return null;
 

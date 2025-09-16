@@ -8,8 +8,7 @@ export async function apiFetch<T>(
       credentials: "include",
       ...options
     });
-    console.log("apiFetch 11",res);
-    
+        
     if (res.ok) {
       const data = await res.json();
       return data;

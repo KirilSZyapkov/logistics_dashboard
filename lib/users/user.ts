@@ -18,8 +18,6 @@ export async function getCurrentUser(userId: string): Promise<typeof userTables.
 };
 
 export async function createUser(data: User): Promise<typeof userTables.$inferSelect> {
-
-  console.log("createUser 22",data);
   
   const response = await apiFetch<typeof userTables.$inferSelect>("/api/user", {
     method: "POST",
