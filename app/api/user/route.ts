@@ -8,6 +8,8 @@ import { currentUser } from '@clerk/nextjs/server';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get('userId');
+  console.log("api/user 11",userId);
+  
   if (!userId) {
     return NextResponse.json({ error: "User ID is required" }, { status: 400 });
   };
@@ -16,6 +18,8 @@ export async function GET(request: Request) {
     .from(userTables)
     .where(eq(userTables.clerkId, userId));
 
+    console.log("api/user 21",currUser);
+    
   if (!currUser) {
     return NextResponse.json(null, { status: 200 }); // връщаме null ако няма
   }
@@ -25,16 +29,20 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const clerkUser = await currentUser();
-  const { userId, name, role, organization } = await request.json();
+  const { clerkId, name, role, organization } = await request.json();
   const newUserData: User = {
-    clerkId: userId,
+    clerkId,
     name,
     email: clerkUser?.emailAddresses[0]?.emailAddress || "",
     role,
     organization
   };
+  console.log("api/user 36",newUserData);
+  
   const parsed = userSchema.safeParse(newUserData);
   if (!parsed.success) {
+    console.log("api/user 38",parsed);
+    
     const errors = parsed.error.errors.map((err) => err.message);
     return NextResponse.json({ message: "Validation errors", errors }, { status: 400 });
   };

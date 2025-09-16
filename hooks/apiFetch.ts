@@ -1,7 +1,6 @@
 export async function apiFetch<T>(
   url: string,
   options?: RequestInit,
-  errorMessage = "An error occurred while fetching data"
 ): Promise<T | null> {
   try {
     const res = await fetch(url, {
@@ -9,7 +8,9 @@ export async function apiFetch<T>(
       credentials: "include",
       ...options
     });
-    if (!res.ok) {
+    console.log("apiFetch 11",res);
+    
+    if (res.ok) {
       const data = await res.json();
       return data;
     } else {

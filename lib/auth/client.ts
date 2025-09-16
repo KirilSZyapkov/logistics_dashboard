@@ -6,8 +6,11 @@ import { userTables } from "@/drizzle/schemas/users";
 import { useEffect, useState } from "react";
 
 export function getCurrentUser() {
-  const { user, isSignedIn } = useUser();
-  const [loadedUser, setLoadedUser] = useState<typeof userTables.$inferSelect | null>(null);
+  const [loadedUser, setLoadedUser] = useState<null | typeof userTables.$inferSelect>(null);
+  const { isSignedIn, user } = useUser();
+
+  console.log("getCurrentUser 12",user);
+  
   
   useEffect(() => {
     async function fetch() {
