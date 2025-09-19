@@ -5,7 +5,9 @@ import { userTables } from "@/drizzle/schemas/users";
 export async function getUser(): Promise<typeof userTables.$inferSelect> {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
-
+  
+  console.log("lib/auth/server 9", userId);
+  
   const currUser = await getCurrentUser(userId);
 
   return currUser;

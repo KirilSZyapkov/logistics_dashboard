@@ -12,6 +12,9 @@ export async function getCurrentUser(userId: string): Promise<typeof userTables.
       credentials: "include",
       cache: "no-store"
     });
+
+    console.log("lib/user 16", response );
+    
   if (!response) throw new Error("Failed to fetch current user");
 
   return response;

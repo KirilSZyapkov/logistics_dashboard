@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     .from(userTables)
     .where(eq(userTables.clerkId, userId));
 
-
+  console.log("api/user 20", currUser);
   if (!currUser) {
     return NextResponse.json(null, { status: 200 }); // връщаме null ако няма
   }

@@ -26,7 +26,7 @@ export default function SyncUser() {
 
   const loadedUser = getCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useUser();  
+  const { user } = useUser();
 
   const form = useForm<SyncData>({
     defaultValues: {
