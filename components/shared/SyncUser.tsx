@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { getCurrentUser } from "@/lib/auth/client";
+import { getClientCurrentUser } from "@/lib/auth/client";
 import { User } from "@/lib/validation";
 import { createUser } from "@/lib/users/user";
 
@@ -24,7 +24,7 @@ type SyncData = {
 
 export default function SyncUser() {
 
-  const loadedUser = getCurrentUser();
+  const loadedUser = getClientCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser();
 

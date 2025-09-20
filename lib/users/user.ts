@@ -3,7 +3,9 @@ import { apiFetch } from "@/hooks/apiFetch";
 import { User } from "@/lib/validation";
 
 export async function getCurrentUser(userId: string): Promise<typeof userTables.$inferSelect> {
-  const response = await apiFetch<typeof userTables.$inferSelect>(`/api/user?userId=${userId}`,
+  console.log("lib/user 6", userId );
+  
+  const response = await apiFetch<typeof userTables.$inferSelect>(`${process.env.NEXT_PUBLIC_URL}/api/user?userId=${userId}`,
     {
       method: "GET",
       headers: {

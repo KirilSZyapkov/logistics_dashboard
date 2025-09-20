@@ -1,4 +1,4 @@
-import { getUser } from "./server";
-import { getCurrentUser } from "./client";
+import { getServerUser } from "./server";
+import { getClientCurrentUser } from "./client";
 
-export { getUser, getCurrentUser };
+export { getServerUser, getClientCurrentUser };

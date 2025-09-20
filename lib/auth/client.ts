@@ -5,7 +5,7 @@ import { apiFetch } from "@/hooks/apiFetch";
 import { userTables } from "@/drizzle/schemas/users";
 import { useEffect, useState } from "react";
 
-export function getCurrentUser() {
+export function getClientCurrentUser() {
   const [loadedUser, setLoadedUser] = useState<null | typeof userTables.$inferSelect>(null);
   const { isSignedIn, user } = useUser();
 

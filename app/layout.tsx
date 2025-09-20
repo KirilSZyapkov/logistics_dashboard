@@ -6,7 +6,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import SidebarComponent from "@/components/shared/SidebarComponent";
 import SyncUser from "@/components/shared/SyncUser";
-import { getUser } from "@/lib/auth";
+import { getServerUser } from "@/lib/auth";
+import Loader from "@/components/shared/Loader";
 
 
 const geistSans = Geist({
@@ -30,7 +31,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const loadedUser = await getUser();
+  const loadedUser = await getServerUser();
 
   return (
     <ClerkProvider>
@@ -44,7 +45,7 @@ export default async function RootLayout({
             <div className="block md:hidden">
               <SidebarTrigger />
             </div>
-            <SyncUser/>
+            {loadedUser === null ? <Loader/> : <SyncUser />}
             {children}
 
           </SidebarProvider>
