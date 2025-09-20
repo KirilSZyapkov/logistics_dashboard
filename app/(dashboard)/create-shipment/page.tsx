@@ -25,9 +25,6 @@ export default function CreateShipmentPage() {
     defaultValues: {
       clientName: "",
       orderNumber: "",
-      tourNumber: "",
-      transportCompany: "",
-      truckNumber: "",
       price: "",
       loadingFrom: "",
       deliveryTo: "",
@@ -95,58 +92,6 @@ export default function CreateShipmentPage() {
                   <FormLabel>Client Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Client Name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="orderNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Order Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Order Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="tourNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Tour Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Tour Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="transportCompany"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Transport Company</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Transport Company" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="truckNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Truck Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Truck Number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

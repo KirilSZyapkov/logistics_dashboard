@@ -54,17 +54,15 @@ export default function ShipmentsPage() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Status</TableHead>
           <TableHead>Order</TableHead>
-          <TableHead>Tour</TableHead>
           <TableHead>Client Name</TableHead>
-          <TableHead>Carrier</TableHead>
-          <TableHead>Truck Number</TableHead>
           <TableHead>Loading day</TableHead>
           <TableHead>Delivery day</TableHead>
           <TableHead>Loading from</TableHead>
           <TableHead>Delivery to</TableHead>
           <TableHead>Price</TableHead>
+          <TableHead>Tour</TableHead>
+          <TableHead>Status</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

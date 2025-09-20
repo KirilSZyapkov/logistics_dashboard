@@ -1,4 +1,4 @@
-import { LayoutDashboard, List, BookMarked,FilePlus2, PencilLine} from "lucide-react";
+import { LayoutDashboard, List, FilePlus2, PencilLine, Truck} from "lucide-react";
 
 export const MENU = [
   {
@@ -12,9 +12,9 @@ export const MENU = [
     icon: List,
   },
   {
-    title: "Offers",
-    url: "/offers",
-    icon: BookMarked,
+    title: "Transports",
+    url: "/transports",
+    icon: Truck,
   },
   
 ]
@@ -27,8 +27,8 @@ export const PROTECTED_MENU = [
     icon: FilePlus2,
   },
   {
-    title: "Create Offer",
-    url: "/create-offer",
+    title: "Create Transport",
+    url: "/create-transport",
     icon: PencilLine,
   },
   

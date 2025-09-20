@@ -1,4 +1,5 @@
-import { integer, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { customAlphabet } from 'nanoid';
 
 export const shipmentStatus = pgEnum("shipment_status", [
   "pending",
@@ -7,14 +8,13 @@ export const shipmentStatus = pgEnum("shipment_status", [
   "delayed",
 ]);
 
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 6);
+
 export const shipmentsTable = pgTable('shipments', {
-  id: uuid().primaryKey().defaultRandom(),
+  id: varchar("id").primaryKey().$defaultFn(() => nanoid()),
   createdBy: varchar("createdBy").notNull(),
   clientName: text("clientName").notNull(),
-  orderNumber: text("orderNumber").notNull().unique(),
-  tourNumber: text("tourNumber").notNull(),
-  transportCompany: text("transportCompany").notNull(),
-  truckNumber: text("truckNumber").notNull(),
+  tourNumber: text("tourNumber").default("N/A"),
   price: text("price").notNull(),
   loadingFrom: text("loadingFrom").notNull(),
   deliveryTo: text("deliveryTo").notNull(),

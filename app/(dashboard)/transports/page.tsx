@@ -1,7 +1,7 @@
-export default function OffersPage() {
+export default function TransportsPage() {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full">
-      <h1 className="text-2xl font-bold mb-4">Offers Page</h1>
+      <h1 className="text-2xl font-bold mb-4">Transports Page</h1>
       <p className="text-gray-600">This is the offers page content.</p>
     </div>
   );
