@@ -166,7 +166,7 @@ export default function CreateShipmentPage() {
             <Button
               type="submit"
               variant="default"
-              className="w-full cursor-pointer"
+              className="w-full py-3 rounded-lg text-lg font-bold transition-all cursor-pointer"
               disabled={isLoading}
             >
               {isLoading
