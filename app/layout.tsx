@@ -45,7 +45,7 @@ export default async function RootLayout({
             <div className="block md:hidden">
               <SidebarTrigger />
             </div>
-            {loadedUser === null ? <Loader/> : <SyncUser />}
+           <SyncUser />
             {children}
 
           </SidebarProvider>

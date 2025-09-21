@@ -59,8 +59,6 @@ export default function SyncUser() {
 
   if (loadedUser){
     return null;
-  } else {
-    return <Loader/>
   };
 
   return (
