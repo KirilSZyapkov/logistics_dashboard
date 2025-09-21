@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "@/services/neon/db";
 import { shipmentsTable } from "@/drizzle/schema";
-import { auth, getAuth } from "@clerk/nextjs/server";
+import { getAuth } from "@clerk/nextjs/server";
 
 
 export async function GET() {

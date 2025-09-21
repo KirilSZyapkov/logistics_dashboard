@@ -17,6 +17,8 @@ import { Button } from "@/components/ui/button";
 import { getClientCurrentUser } from "@/lib/auth/client";
 import { User } from "@/lib/validation";
 import { createUser } from "@/lib/users/user";
+import Loader from "@/components/shared/Loader";
+
 
 type SyncData = {
   name: string;
@@ -55,7 +57,11 @@ export default function SyncUser() {
     }
   };
 
-  if (loadedUser) return null;
+  if (loadedUser){
+    return null;
+  } else {
+    return <Loader/>
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">

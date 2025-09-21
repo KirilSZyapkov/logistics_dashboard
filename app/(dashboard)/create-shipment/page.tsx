@@ -23,8 +23,7 @@ export default function CreateShipmentPage() {
   const form = useForm<z.infer<typeof shipmentSchema>>({
     resolver: zodResolver(shipmentSchema),
     defaultValues: {
-      clientName: "",
-      orderNumber: "",
+      clientName: "",      
       price: "",
       loadingFrom: "",
       deliveryTo: "",
@@ -57,10 +56,10 @@ export default function CreateShipmentPage() {
   async function onSubmit(values: z.infer<typeof shipmentSchema>) {
     setIsLoading(true);
     try {
-      
-      if(values.clientName === "" || values.orderNumber === "" || values.tourNumber === "" || values.transportCompany === "" || values.truckNumber === "" || values.price === "" || values.loadingFrom === "" || values.deliveryTo === "" || values.loadingDate === "" || values.deliveryDate === "") {
+
+      if (values.clientName === "" || values.price === "" || values.loadingFrom === "" || values.deliveryTo === "" || values.loadingDate === "" || values.deliveryDate === "") {
         throw new Error("Please fill in all fields.");
-      }
+      };
       const response = await createShipment(values);
       alert("Shipment created successfully!");
       form.reset();

@@ -2,10 +2,7 @@ import {z} from 'zod';
 
 export const shipmentSchema = z.object({
  clientName: z.string().min(1, {message: "Client name is required"}),
- orderNumber: z.string().min(1,{message: "Order number is required"}),
- tourNumber: z.string().min(1, {message: "Tour number is required"}),
- transportCompany: z.string().min(1, {message: "Transport company is required"}),
- truckNumber: z.string().min(1, {message: "Truck number is required"}),
+ tourNumber: z.string().optional(),
  price: z.string().min(1, {message: "Price is required"}),
  loadingFrom: z.string().min(1, {message: "Loading from is required"}),
  deliveryTo: z.string().min(1, {message: "Delivery to is required"}),
@@ -15,18 +12,15 @@ export const shipmentSchema = z.object({
 
 export type Shipment = z.infer<typeof shipmentSchema>;
 
-export const offersSchema = z.object({
-  clientName: z.string().min(1, {message: "Client name is required"}),
-  contactPerson: z.string().min(1, {message: "Contact person is required"}),
-  phone: z.string().min(1, {message: "Phone number is required"}),
-  email: z.string().email(),
-  destination: z.string().min(1, {message: "Destination is required"}),
-  cargoDetails: z.string().min(1, {message: "Cargo details is required"}),
-  priceQuote: z.string().min(1, {message: "Price quote is required"}),
-  refusalReason: z.string().optional(),
+export const transportsSchema = z.object({
+  transportCompanyName: z.string().min(1, {message: "Transport company name is required"}),
+  shipmentId:z.string().min(1, {message: "Shipment ID is required"}),
+  truckNumber: z.string().min(1, {message: "Truck number is required"}),
+  loadingDay: z.string().min(1, {message: "Loading day is required"}),
+  deliveryDay: z.string().min(1, {message: "Delivery day is required"}),
 });
 
-export type Offers = z.infer<typeof offersSchema>;
+export type Transports = z.infer<typeof transportsSchema>;
 
 export const userSchema = z.object({
   clerkId: z.string().min(1, {message: "User Clerk ID is required"}),
