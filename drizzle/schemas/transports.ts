@@ -11,12 +11,12 @@ export const transportStatus = pgEnum("transport_status", [
 
 export const transportsTable = pgTable("transports", {
   id: varchar("id").primaryKey().$defaultFn(() => nanoid()),
-  createdBy: varchar("created_by").notNull(),
-  transportCompanyName: text("transport_company_name").notNull(),
-  shipmentId: varchar("shipment_id").notNull(),
-  trcukNumber: text("truck_number").notNull(),
-  loadingDay: text("loading_day").notNull(),
-  deliveryDay: text("delivery_day").notNull(),
+  createdBy: varchar("createdBy").notNull(),
+  transportCompanyName: text("transportCompanyName").notNull(),
+  shipmentId: varchar("shipmentId").notNull(),
+  truckNumber: text("truckNumber").notNull(),
+  loadingDay: text("loadingDay").notNull(),
+  deliveryDay: text("deliveryDay").notNull(),
   status: text("status").default('in_transit'),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
