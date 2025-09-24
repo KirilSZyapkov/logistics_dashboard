@@ -15,20 +15,49 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createTransport } from "@/lib/transports/transports";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+
+type FreeOrders = {
+  id: string;
+}[];
 
 export default function CreateTransportPage() {
+  const [freeOrders, setFreeOrders] = useState<FreeOrders>([]);
+  const [selectedOrder, setSelectedOrder] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchFreeOrders() {
+      try {
+        const response = await fetch("/api/shipments/list", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          cache: "no-store",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch free shipments");
+        };
+        const data = await response.json();
+        setFreeOrders(data);
+
+      } catch (error) {
+        console.log(error);
+        setFreeOrders([]);
+      }
+    };
+    fetchFreeOrders();
+  }, []);
+
   const form = useForm<z.infer<typeof transportsSchema>>({
     resolver: zodResolver(transportsSchema),
     defaultValues: {
@@ -36,7 +65,6 @@ export default function CreateTransportPage() {
       truckNumber: "",
       deliveryDay: "",
       loadingDay: "",
-      shipmentId: ""
     },
   });
 
@@ -62,13 +90,21 @@ export default function CreateTransportPage() {
 
 
   async function onSubmit(values: z.infer<typeof transportsSchema>) {
+    
     setIsLoading(true);
+    const newTransport = {
+      ...values,
+      shipmentId: selectedOrder,
+    };
     try {
 
-      if (values.transportCompanyName === "" || values.truckNumber === "" || values.deliveryDay === "" || values.loadingDay === "" || values.shipmentId === "") {
+      if (values.transportCompanyName === "" || values.truckNumber === "" || values.deliveryDay === "" || values.loadingDay === "" || selectedOrder === "") {
         throw new Error("Please fill in all fields.");
       };
-      const response = await createTransport(values);
+      const response = await createTransport(newTransport);
+      if (!response.ok) {
+        throw new Error("Failed to create transport");
+      };
       alert("Shipment created successfully!");
       form.reset();
       setIsLoading(false);
@@ -78,9 +114,9 @@ export default function CreateTransportPage() {
       setIsLoading(false);
       return;
 
-    }
+    };
 
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 px-2 w-full">
@@ -123,17 +159,15 @@ export default function CreateTransportPage() {
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              )}  
+              )}
             />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full rounded-lg">Free Shipments</Button>
+                <Button variant="outline" className="w-full rounded-lg">{selectedOrder || "Free Shipments"}</Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <DropdownMenuRadioGroup>
-                  <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+                <DropdownMenuRadioGroup onValueChange={(value) => setSelectedOrder(value)}>
+                  {freeOrders.length !== 0 && (freeOrders.map(order => (<DropdownMenuRadioItem key={order.id} value={order.id}>{order.id}</DropdownMenuRadioItem>)))}
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>

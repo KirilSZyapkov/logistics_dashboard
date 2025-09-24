@@ -14,7 +14,7 @@ export type Shipment = z.infer<typeof shipmentSchema>;
 
 export const transportsSchema = z.object({
   transportCompanyName: z.string().min(1, {message: "Transport company name is required"}),
-  shipmentId:z.string().min(1, {message: "Shipment ID is required"}),
+ 
   truckNumber: z.string().min(1, {message: "Truck number is required"}),
   loadingDay: z.string().min(1, {message: "Loading day is required"}),
   deliveryDay: z.string().min(1, {message: "Delivery day is required"}),
