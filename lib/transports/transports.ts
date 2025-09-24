@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Transports } from "../validation";
 
-type newTransport = Transports & { shipmentId: string };
+type newTransport = Transports & { shipmentId: string, createdBy: string };
 
 export async function getAllTransports(){
   const response = await fetch('/api/transpors', {

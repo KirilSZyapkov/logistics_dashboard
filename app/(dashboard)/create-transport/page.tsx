@@ -24,6 +24,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { create } from "domain";
 
 type FreeOrders = {
   id: string;
@@ -90,11 +91,15 @@ export default function CreateTransportPage() {
 
 
   async function onSubmit(values: z.infer<typeof transportsSchema>) {
+    if(!user){
+      throw new Error("User must be logged in to create a transport");
+    };
     
     setIsLoading(true);
     const newTransport = {
       ...values,
       shipmentId: selectedOrder,
+      createdBy: user.id
     };
     try {
 
