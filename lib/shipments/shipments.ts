@@ -56,7 +56,21 @@ export async function createShipment(data: Shipment) {
   return NextResponse.json({ shipments }, { status: 201 });
 
 }
-export async function updateShipment(id: string, data: Partial<typeof shipmentsTable.$inferInsert>) { }
+export async function updateShipment(id: string, data: Partial<typeof shipmentsTable.$inferInsert>) { 
+  const response = await fetch('/api/shipments',{
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({id, data}),
+    credentials: "include"
+  });
+  if (!response.ok) {
+    return NextResponse.json({ message: "Faild to update shipment" }, { status: 500 });;
+  };
+  const updatedShipment: ShipmentResponse = await response.json();
+  return NextResponse.json(updatedShipment, { status: 200 });
+}
 
 export async function deleteShipment(id: string) { }
 

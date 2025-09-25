@@ -15,10 +15,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const { userId, sessionClaims } = getAuth(req);
-
-  console.log(sessionClaims);
-  
+  const { userId } = getAuth(req);
 
   if (!userId) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -38,6 +35,15 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(createdShipment, { status: 201 });
 }
 
-export async function PUT(req: NextRequest) { }
+export async function PUT(req: NextRequest) {
+  const { userId } = getAuth(req);
+
+  if (!userId) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  };
+  const body = await req.json();
+  const shipmentId = body.id;
+  const tourNumber = body.tourNumber;
+ }
 
 export async function DELETE(req: NextRequest) { }
