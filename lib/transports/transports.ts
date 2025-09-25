@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Transports } from "../validation";
+import { transportsTable } from "@/drizzle/schemas/transports";
 
 type newTransport = Transports & { shipmentId: string, createdBy: string };
 
@@ -14,12 +15,12 @@ export async function getAllTransports(){
     if (!response.ok) {
       return NextResponse.json({ message: "Faild to load all shipments" }, { status: 500 });;
     }
-    const data: Transports[] = await response.json();
+    const data: typeof transportsTable  = await response.json();
     return NextResponse.json(data, { status: 200 });
 }
 
 export async function getTransportById(id: string) {}
-
+ 
 export async function createTransport(data: newTransport) {
   const response = await fetch("/api/transports", {
     method:"POST",
@@ -33,7 +34,7 @@ export async function createTransport(data: newTransport) {
     const errorData = await response.json();
     return NextResponse.json({ message: errorData.message || "Failed to create transport" }, { status: 500 });
   };
-  const newCreatedTransport: Transports = await response.json();
+  const newCreatedTransport: typeof transportsTable = await response.json();
   return NextResponse.json(newCreatedTransport, { status: 201 });
 }
 export async function updateTransport(id: string, data: newTransport) {}

@@ -56,13 +56,13 @@ export async function createShipment(data: Shipment) {
   return NextResponse.json({ shipments }, { status: 201 });
 
 }
-export async function updateShipment(id: string, data: Partial<typeof shipmentsTable.$inferInsert>) { 
+export async function updateShipment(userId: string, data: Partial<typeof shipmentsTable.$inferInsert>) { 
   const response = await fetch('/api/shipments',{
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({id, data}),
+    body: JSON.stringify({userId, data}),
     credentials: "include"
   });
   if (!response.ok) {

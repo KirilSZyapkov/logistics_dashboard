@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { transportsSchema, Transports } from "@/lib/validation";
+import { transportsSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { create } from "domain";
+import { updateShipment } from "@/lib/shipments/shipments";
+
 
 type FreeOrders = {
   id: string;
@@ -107,9 +108,12 @@ export default function CreateTransportPage() {
         throw new Error("Please fill in all fields.");
       };
       const response = await createTransport(newTransport);
-      if (!response.ok) {
-        throw new Error("Failed to create transport");
+      if(response.status === 500){
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create transport");
       };
+      
+      const updatedShipment = await updateShipment(user.id, response );
       alert("Shipment created successfully!");
       form.reset();
       setIsLoading(false);
