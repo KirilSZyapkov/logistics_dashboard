@@ -19,6 +19,7 @@ export async function getAllTransports(){
 }
 
 export async function getTransportById(id: string) {}
+
 export async function createTransport(data: newTransport) {
   const response = await fetch("/api/transports", {
     method:"POST",
