@@ -2,6 +2,7 @@
 import { shipmentsTable } from "@/drizzle/schemas/shipments";
 import { Shipment } from "../validation";
 import { NextResponse } from "next/server";
+import { transportsTable } from "@/drizzle/schemas/transports";
 
 
 type ShipmentResponse = typeof shipmentsTable.$inferInsert;
@@ -56,13 +57,13 @@ export async function createShipment(data: Shipment) {
   return NextResponse.json({ shipments }, { status: 201 });
 
 }
-export async function updateShipment(userId: string, data: Partial<typeof shipmentsTable.$inferInsert>) { 
+export async function updateShipment(selectedOrder: string, data: Partial<typeof transportsTable.$inferSelect>) { 
   const response = await fetch('/api/shipments',{
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({userId, data}),
+    body: JSON.stringify({selectedOrder, data}),
     credentials: "include"
   });
   if (!response.ok) {

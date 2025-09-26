@@ -113,9 +113,12 @@ export default function CreateTransportPage() {
         throw new Error(errorData.message || "Failed to create transport");
       };
       
-      const updatedShipment = await updateShipment(user.id, response );
+      const transport = await response.json();
+      await updateShipment(selectedOrder, transport );
+
       alert("Shipment created successfully!");
       form.reset();
+      setSelectedOrder("");
       setIsLoading(false);
     } catch (error: any) {
       console.error("Error creating shipment:", error);

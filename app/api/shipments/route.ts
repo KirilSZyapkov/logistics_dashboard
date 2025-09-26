@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import db from "@/services/neon/db";
 import { shipmentsTable } from "@/drizzle/schema";
 import { getAuth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 
 
 export async function GET() {
@@ -42,8 +43,21 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   };
   const body = await req.json();
-  const shipmentId = body.id;
-  const tourNumber = body.tourNumber;
+  const selectedOrder = body.selectedOrder;
+  const data = body.data;
+  console.log("api/shipments 48",selectedOrder );
+  console.log("api/shipments 49",data );
+  
+  const [updatedShipment] = await db
+  .update(shipmentsTable)
+  .set({tourNumber: data.id})
+  .where(eq(shipmentsTable.id, selectedOrder))
+  .returning();
+
+  if (!updatedShipment) {
+    return NextResponse.json({ message: "Failed to update shipment" }, { status: 500 });
+  };
+  return NextResponse.json(updatedShipment, { status: 200 });
  }
 
 export async function DELETE(req: NextRequest) { }

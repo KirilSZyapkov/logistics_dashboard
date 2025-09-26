@@ -37,6 +37,6 @@ export async function createTransport(data: newTransport) {
   const newCreatedTransport: typeof transportsTable = await response.json();
   return NextResponse.json(newCreatedTransport, { status: 201 });
 }
-export async function updateTransport(id: string, data: newTransport) {}
+export async function updateTransport(id: string, data: typeof transportsTable.$inferSelect) {}
 export async function deleteTransport(id: string) {}
 export async function getAllTransportsByUserId(userId: string) {}
