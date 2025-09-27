@@ -114,7 +114,7 @@ export default function CreateTransportPage() {
       };
       
       const transport = await response.json();
-      await updateShipment(selectedOrder, transport );
+      await updateShipment(selectedOrder, transport, status="in_transit" );
 
       alert("Shipment created successfully!");
       form.reset();
