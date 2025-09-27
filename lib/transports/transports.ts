@@ -5,7 +5,7 @@ import { transportsTable } from "@/drizzle/schemas/transports";
 type newTransport = Transports & { shipmentId: string, createdBy: string };
 
 export async function getAllTransports(){
-  const response = await fetch('/api/transpors', {
+  const response = await fetch('/api/transports', {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

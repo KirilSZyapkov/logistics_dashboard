@@ -6,6 +6,8 @@ import { transportsTable } from "@/drizzle/schema";
 
 export async function GET() {
   const getAllTransports = await db.select().from(transportsTable);
+  console.log("api/transports 9",getAllTransports);
+  
   if (getAllTransports.length === 0) {
     return NextResponse.json({ message: "No shipments found" }, { status: 404 });
   }
