@@ -3,6 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "@/services/neon/db";
 import { transportsTable } from "@/drizzle/schema";
+import { getAuth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 
 export async function GET() {
   const getAllTransports = await db.select().from(transportsTable);
@@ -30,5 +32,27 @@ export async function POST(req: NextRequest){
 
 };
 
-export async function PUT(req: NextRequest) {}
+export async function PUT(req: NextRequest) {
+  const {userId} = getAuth(req);
+
+  if(!userId){
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  };
+
+  const body = await req.json();
+  const id = body.id;
+  const status = body.status;
+
+  const [updatedStatusTransport] = await db
+  .update(transportsTable)
+  .set({status: status})
+  .where(eq(transportsTable.id, id))
+  .returning();
+
+  if(!updatedStatusTransport){
+    return NextResponse.json({ message: "Failed to update transport" }, { status: 500 });
+  };
+  return NextResponse.json(updatedStatusTransport, { status: 200 });
+};
+
 export async function DELETE(req: NextRequest) {}
