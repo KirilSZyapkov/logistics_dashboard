@@ -83,6 +83,7 @@ export default function TransportsPage() {
           <TableHead>Truck Number</TableHead>
           <TableHead>Loading day</TableHead>
           <TableHead>Delivery day</TableHead>
+          <TableHead>Price</TableHead>
           <TableHead>Status</TableHead>
         </TableRow>
       </TableHeader>

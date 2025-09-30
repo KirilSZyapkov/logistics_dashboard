@@ -13,7 +13,7 @@ export default function TablaData({ shipment }: { shipment: typeof shipmentsTabl
       <TableCell>{shipment.deliveryDate}</TableCell>
       <TableCell>{shipment.loadingFrom}</TableCell>
       <TableCell>{shipment.deliveryTo}</TableCell>
-      <TableCell>{shipment.price}</TableCell>
+      <TableCell>{shipment.price} EUR</TableCell>
       <TableCell>{shipment.tourNumber}</TableCell>
       <TableCell>{shipment.status}</TableCell>
     </TableRow>

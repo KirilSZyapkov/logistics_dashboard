@@ -22,6 +22,7 @@ export default function TablaData({ transport, updateTransportStatus }: { transp
       <TableCell>{transport.truckNumber}</TableCell>
       <TableCell>{transport.loadingDay}</TableCell>
       <TableCell>{transport.deliveryDay}</TableCell>
+      <TableCell>{transport.price} EUR</TableCell>
       <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

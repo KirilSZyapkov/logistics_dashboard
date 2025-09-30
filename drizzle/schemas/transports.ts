@@ -15,6 +15,7 @@ export const transportsTable = pgTable("transports", {
   transportCompanyName: text("transportCompanyName").notNull(),
   shipmentId: varchar("shipmentId").notNull(),
   truckNumber: text("truckNumber").notNull(),
+  price: text("price").notNull(),
   loadingDay: text("loadingDay").notNull(),
   deliveryDay: text("deliveryDay").notNull(),
   status: text("status").default('in_transit'),

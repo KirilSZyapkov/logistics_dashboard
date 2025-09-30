@@ -67,6 +67,7 @@ export default function CreateTransportPage() {
       truckNumber: "",
       deliveryDay: "",
       loadingDay: "",
+      price: ""
     },
   });
 
@@ -219,6 +220,23 @@ export default function CreateTransportPage() {
                 )}
               />
             </div>
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold text-gray-700">Transport Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Transport Price"
+                      {...field}
+                      className="rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button
               type="submit"
               variant="default"

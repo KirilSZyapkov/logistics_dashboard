@@ -1,0 +1,1 @@
+ALTER TABLE "transports" ADD COLUMN "price" text NOT NULL;
