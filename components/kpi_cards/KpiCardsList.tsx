@@ -1,6 +1,6 @@
 import { getShipmentsData, getTransportsData } from "@/lib/kpi_cards/kpiCards";
 import ShipmentsCard from "./_components/ShipmentsCard";
-// import TransportsCard from "./_components/TransportsCard";
+import TransportsCard from "./_components/TransportsCard";
 
 export default async function KpiCardsList() {
 
@@ -14,10 +14,10 @@ export default async function KpiCardsList() {
   console.log("KpiCardsList 9", transportsData);
 
   return (
-    <div className="flex items-center justify-center h-screen w-full flex-col">
-
+    <div className="flex items-center w-full flex-col p-5 gap-10">
       <ShipmentsCard shipmentsData={shipmentsData} />
-      {/* <TransportsCard transportsData={transportsData} /> */}
+
+      <TransportsCard transportsData={transportsData} />
     </div>
   );
 }
