@@ -15,7 +15,7 @@ export default function TablaData({ transport, updateTransportStatus }: { transp
   const statusList = transportStatus.enumValues;
 
   return (
-    <TableRow>
+    <TableRow className={transport.status === "in_transit" ? "bg-yellow-50" : transport.status === "delivered" ? "bg-green-50" : transport.status === "delayed" ? "bg-red-50" : ""}>
       <TableCell>{transport.id}</TableCell>
       <TableCell>{transport.shipmentId}</TableCell>
       <TableCell>{transport.transportCompanyName}</TableCell>
