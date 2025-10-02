@@ -1,4 +1,4 @@
-import { getShipmentsData, getTransportsData } from "@/lib/kpi_cards/kpiCards";
+import { getShipmentsData, getTransportsData } from "@/lib/summary/summary";
 import ShipmentsCard from "./_components/ShipmentsCard";
 import TransportsCard from "./_components/TransportsCard";
 

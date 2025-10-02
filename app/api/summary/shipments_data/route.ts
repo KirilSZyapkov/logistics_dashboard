@@ -1,4 +1,4 @@
-import { getShipmentsData } from "@/lib/kpi_cards/kpiCards";
+import { getShipmentsData } from "@/lib/summary/summary";
 import { NextResponse } from "next/server";
 
 export async function GET() {
