@@ -12,7 +12,27 @@ const data01 = [
   {name: 'Group F', value: 189},
 ];
 
-export default function PieChartShipments() {
+type Props = {
+  total?: number;
+  in_transit?: number;
+  delivered?: number;
+  delayed?: number;
+  pending?: number;
+  totalIncome?: number;
+  totalSpent?: number;
+};
+
+export default function PieChartShipments({data}: { data: Props }) {
+
+  const summary = [
+    {name: "Total", value: data?.total || 0},
+    {name: "In Transit", value: data?.in_transit || 0},
+    {name: "Delivered", value: data?.delivered || 0},
+    {name: "Delayed", value: data?.delayed || 0},
+    {name: "Pending", value: data?.pending || 0},
+    {name: "Total Income", value: data?.totalIncome || 0},
+    {name: "Total Spent", value: data?.totalSpent || 0}
+  ]
   return (
     <Card className="p-4 h-[300px] w-[300px]">
       <ResponsiveContainer width="100%" height="100%">
@@ -20,7 +40,7 @@ export default function PieChartShipments() {
           <Pie
             dataKey="value"
             isAnimationActive={false}
-            data={data01}
+            data={summary}
             cx="50%"
             cy="50%"
             outerRadius={80}
