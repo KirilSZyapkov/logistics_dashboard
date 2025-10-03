@@ -7,5 +7,6 @@ export async function GET() {
   if (!shipmentsData) {
     return NextResponse.json({ message: "Failed to load shipments data" }, { status: 500 });
   };
-  return NextResponse.json(shipmentsData, { status: 200 });
+  const data = await shipmentsData.json();
+  return NextResponse.json(data, { status: 200 });
 }

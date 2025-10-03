@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 import PieChartShipments from "../charts/PieChartShipments";
 
@@ -36,11 +36,26 @@ export default function ChartsSection() {
           cache: 'no-store',
           credentials: 'include',
         });
-        if(!response.ok){
+        if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();        
-        setShipmentsDataList(data);
+        const shipmentsSummary = await response.json();
+        setShipmentsDataList(shipmentsSummary);
+        const response_two = await fetch("/api/summary/transports_data", {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          cache: 'no-store',
+          credentials: 'include'
+        });
+        if (!response_two.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        ;
+
+        const transportsSummary = await response_two.json();
+        setTransportsDataList(transportsSummary)
       } catch (error) {
         console.error("Error fetching shipments data:", error);
       }
@@ -49,12 +64,13 @@ export default function ChartsSection() {
     load();
   }, []);
 
-  console.log("chartsection 53",shipmentsDataList);
-  
+  console.log("chartsection 67", shipmentsDataList);
+  console.log("chartsection 68", transportsDataList);
+
 
   return (
     <section className="w-full">
-      <PieChartShipments />
+      <PieChartShipments/>
     </section>
   );
 }
