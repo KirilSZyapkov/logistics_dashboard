@@ -1,8 +1,9 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 import PieChartShipments from "../charts/PieChartShipments";
+import BarChartShipments from "../charts/BarChartShipments";
 
 type ShipmentsDataList = {
   total: number;
@@ -75,20 +76,25 @@ export default function ChartsSection() {
 
   const shipmentsData = {
     pending: inPending,
-    delivered:inDeliverd,
+    delivered: inDeliverd,
     in_transit: inTransit,
     delayed: inDelayed
   };
 
   const transportsData = {
-    delivered:inDeliverdTransport,
+    delivered: inDeliverdTransport,
     in_transit: inTransitTransport,
     delayed: inDelayedTransport
   };
   return (
-    <section className="w-full flex items-center justify-evenly">
-      <PieChartShipments data={shipmentsData} title={"Shipments Breakdown"}/>
-      <PieChartShipments data={transportsData} title={"Transport Breakdown"}/>
+    <section className="w-full flex flex-col items-center justify-center gap-6 py-4 px-2">
+      <div className="flex flex-col md:flex-row items-center gap-6 w-full">
+        <PieChartShipments data={shipmentsData} title={"Shipments Breakdown"} />
+        <PieChartShipments data={transportsData} title={"Transport Breakdown"} />
+      </div>
+      <div className="w-full flex justify-center">
+        <BarChartShipments />
+      </div>
     </section>
   );
 }
