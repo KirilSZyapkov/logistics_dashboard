@@ -49,6 +49,7 @@ export default function PieChartShipments({data}: Props) {
 
   return (
     <Card className="p-4 h-[300px] w-[300px]">
+      <h3 className="font-semibold mb-2">Monthly Breakdown</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
