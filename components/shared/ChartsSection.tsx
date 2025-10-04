@@ -67,10 +67,20 @@ export default function ChartsSection() {
   console.log("chartsection 67", shipmentsDataList);
   console.log("chartsection 68", transportsDataList);
 
+  const inTransit = (Number(shipmentsDataList?.in_transit) / Number(shipmentsDataList?.total)) * 100;
+  const inDelayed = (Number(shipmentsDataList?.delayed) / Number(shipmentsDataList?.total)) * 100;
+  const inPending = (Number(shipmentsDataList?.pending) / Number(shipmentsDataList?.total)) * 100;
+  const inDeliverd = (Number(shipmentsDataList?.delivered) / Number(shipmentsDataList?.total)) * 100;
 
+  const data = {
+    pending: inPending,
+    delivered:inDeliverd,
+    in_transit: inTransit,
+    delayed: inDelayed
+  }
   return (
     <section className="w-full">
-      <PieChartShipments/>
+      <PieChartShipments data={data}/>
     </section>
   );
 }
