@@ -87,8 +87,8 @@ export default function ChartsSection() {
   };
   return (
     <section className="w-full flex items-center justify-evenly">
-      <PieChartShipments data={shipmentsData}/>
-      <PieChartShipments data={transportsData}/>
+      <PieChartShipments data={shipmentsData} title={"Shipments Breakdown"}/>
+      <PieChartShipments data={transportsData} title={"Transport Breakdown"}/>
     </section>
   );
 }

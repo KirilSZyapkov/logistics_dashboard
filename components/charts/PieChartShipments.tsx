@@ -13,7 +13,8 @@ type Props = {
       pending?: number;
       totalIncome?: number;
       totalSpent?: number;
-    }
+    },
+  title: string
 };
 
 const RADIAN = Math.PI / 180;
@@ -34,7 +35,7 @@ const renderCustomizedLabel = ({cx, cy, midAngle, innerRadius, outerRadius, perc
   );
 };
 
-export default function PieChartShipments({data}: Props) {
+export default function PieChartShipments({data, title}: Props) {
 
   const chartData = [
     {name: "Total", value: Number(data?.total) || 0},
@@ -49,7 +50,7 @@ export default function PieChartShipments({data}: Props) {
 
   return (
     <Card className="p-4 h-[300px] w-[300px]">
-      <h3 className="font-semibold mb-2">Monthly Breakdown</h3>
+      <h3 className="font-semibold mb-2 text-center">{title}</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
