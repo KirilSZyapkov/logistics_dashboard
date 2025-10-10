@@ -14,20 +14,16 @@ export function mapingDateToYYYYMM(date: typeof shipmentsTable.$inferSelect[]) {
       const key = item.createdAt?.toString().slice(0, 7);
       if (key) {
         if (!mapedDate.has(key)) {
-          if (item.status === "delivered") {
-            mapedDate.set(key, { "delivered": [] });
-          } else if (item.status === "delayed") {
-            mapedDate.set(key, { "delayed": [] });
-          };
+          mapedDate.set(key, { Delivered: 0, Delayed: 0 });
         };
         if (item.status === "delivered") {
-          mapedDate.get(key).delivered?.push(item);
+          mapedDate.get(key).Delivered +=1;
         } else if (item.status === "delayed") {
-          mapedDate.get(key).delayed?.push(item);
+          mapedDate.get(key).Delayed +=1;
         };
       }
     })
   };
 
-  return Array.from(mapedDate, ([key, value]) => ({ key, ...value }));
+  return Array.from(mapedDate, ([key, value]) => ({ date:key, ...value }));
 }

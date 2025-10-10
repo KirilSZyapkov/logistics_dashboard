@@ -8,7 +8,7 @@ import { shipmentsTable } from "@/drizzle/schemas/shipments";
 import { getAllShipments } from "@/lib/shipments/shipments";
 import { mapingDateToYYYYMM } from "@/lib/utils";
 
-type ShipmentsDataList = {
+export type ShipmentsDataList = {
   total: number;
   in_transit: number;
   delivered: number;
@@ -17,7 +17,7 @@ type ShipmentsDataList = {
   totalIncome: number;
 };
 
-type TransportsDataList = {
+export type TransportsDataList = {
   total: number;
   in_transit: number;
   delivered: number;
@@ -25,10 +25,16 @@ type TransportsDataList = {
   totalSpent: number;
 };
 
+type ShipmentsData = {
+  date: string;
+  delivered: number;
+  delayed: number;
+}
+
 export default function ChartsSection() {
   const [shipmentsDataList, setShipmentsDataList] = useState<ShipmentsDataList>();
   const [transportsDataList, setTransportsDataList] = useState<TransportsDataList>();
-  const [shipments, setShipments] = useState<typeof shipmentsTable.$inferSelect[]>();
+  const [shipments, setShipments] = useState<ShipmentsData[]>([]);
 
   useEffect(() => {
     async function load() {
@@ -102,13 +108,6 @@ export default function ChartsSection() {
     delayed: inDelayedTransport
   };
 
-  const shipmentsBarData = shipments?.map(s=>{
-    let deliveredCount = 0;
-    let delayedCount = 0;
-
-    if (s.status === 'delivered') deliveredCount += 1;
-    if (s.status === 'delayed') delayedCount += 1;
-  })
   return (
     <section className="w-full flex flex-col items-center justify-center gap-6 py-4 px-2">
       <div className="flex flex-col md:flex-row items-center gap-6 w-full">
@@ -116,7 +115,7 @@ export default function ChartsSection() {
         <PieChartShipments data={transportsData} title={"Transport Breakdown"} />
       </div>
       <div className="w-full flex justify-center">
-        <BarChartShipments />
+        <BarChartShipments data={shipments} title={"Shipments Statistic"} />
       </div>
     </section>
   );
