@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 
 import PieChartShipments from "../charts/PieChartShipments";
 import BarChartShipments from "../charts/BarChartShipments";
+import { shipmentsTable } from "@/drizzle/schemas/shipments";
+import { getAllShipments } from "@/lib/shipments/shipments";
+import { mapingDateToYYYYMM } from "@/lib/utils";
 
 type ShipmentsDataList = {
   total: number;
@@ -25,6 +28,7 @@ type TransportsDataList = {
 export default function ChartsSection() {
   const [shipmentsDataList, setShipmentsDataList] = useState<ShipmentsDataList>();
   const [transportsDataList, setTransportsDataList] = useState<TransportsDataList>();
+  const [shipments, setShipments] = useState<typeof shipmentsTable.$inferSelect[]>();
 
   useEffect(() => {
     async function load() {
@@ -56,7 +60,15 @@ export default function ChartsSection() {
         ;
 
         const transportsSummary = await response_two.json();
-        setTransportsDataList(transportsSummary)
+        setTransportsDataList(transportsSummary);
+
+        const responseShipments = await getAllShipments();
+        if (responseShipments.status === 200) {
+          const data = await responseShipments.json();
+          const dataArray = mapingDateToYYYYMM(data);
+          setShipments(dataArray);
+        };
+
       } catch (error) {
         console.error("Error fetching shipments data:", error);
       }
@@ -64,6 +76,9 @@ export default function ChartsSection() {
     };
     load();
   }, []);
+
+  console.log("chartsSection 80",shipments);
+  
 
   const inTransit = (Number(shipmentsDataList?.in_transit) / Number(shipmentsDataList?.total)) * 100;
   const inDelayed = (Number(shipmentsDataList?.delayed) / Number(shipmentsDataList?.total)) * 100;
@@ -86,6 +101,14 @@ export default function ChartsSection() {
     in_transit: inTransitTransport,
     delayed: inDelayedTransport
   };
+
+  const shipmentsBarData = shipments?.map(s=>{
+    let deliveredCount = 0;
+    let delayedCount = 0;
+
+    if (s.status === 'delivered') deliveredCount += 1;
+    if (s.status === 'delayed') delayedCount += 1;
+  })
   return (
     <section className="w-full flex flex-col items-center justify-center gap-6 py-4 px-2">
       <div className="flex flex-col md:flex-row items-center gap-6 w-full">

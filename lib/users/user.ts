@@ -15,7 +15,7 @@ export async function getCurrentUser(userId: string): Promise<typeof userTables.
       cache: "no-store"
     });
 
-    console.log("lib/user 16", response );
+    console.log("lib/user 16", response?.createdAt?.toString().slice(0, 7).endsWith("09") );
     
   if (!response) throw new Error("Failed to fetch current user");
 
