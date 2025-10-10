@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 
 import PieChartShipments from "../charts/PieChartShipments";
 import BarChartShipments from "../charts/BarChartShipments";
-import { shipmentsTable } from "@/drizzle/schemas/shipments";
 import { getAllShipments } from "@/lib/shipments/shipments";
 import { mapingDateToYYYYMM } from "@/lib/utils";
+import { getAllTransports } from "@/lib/transports/transports";
 
 export type ShipmentsDataList = {
   total: number;
@@ -27,18 +27,26 @@ export type TransportsDataList = {
 
 type ShipmentsData = {
   date: string;
-  delivered: number;
-  delayed: number;
-}
+  Delivered: number;
+  Delayed: number;
+};
+
+type TransportsData = {
+  date: string;
+  Delivered: number;
+  Delayed: number;
+};
 
 export default function ChartsSection() {
   const [shipmentsDataList, setShipmentsDataList] = useState<ShipmentsDataList>();
   const [transportsDataList, setTransportsDataList] = useState<TransportsDataList>();
   const [shipments, setShipments] = useState<ShipmentsData[]>([]);
+  const [transports, setTransports] = useState<TransportsData[]>([]);
 
   useEffect(() => {
     async function load() {
       try {
+        // Fetch shipments summary
         const response = await fetch('/api/summary/shipments_data', {
           method: "GET",
           headers: {
@@ -52,6 +60,8 @@ export default function ChartsSection() {
         }
         const shipmentsSummary = await response.json();
         setShipmentsDataList(shipmentsSummary);
+
+        // Fetch transports summary
         const response_two = await fetch("/api/summary/transports_data", {
           method: "GET",
           headers: {
@@ -68,11 +78,20 @@ export default function ChartsSection() {
         const transportsSummary = await response_two.json();
         setTransportsDataList(transportsSummary);
 
+        // Fetch shipments for BarChart
         const responseShipments = await getAllShipments();
         if (responseShipments.status === 200) {
           const data = await responseShipments.json();
           const dataArray = mapingDateToYYYYMM(data);
           setShipments(dataArray);
+        };
+
+        // Fetch transports for BarChart
+        const responseTransports = await getAllTransports();
+        if (responseTransports.status === 200) {
+          const data = await responseTransports.json();
+          const dataArray = mapingDateToYYYYMM(data);
+          setTransports(dataArray);
         };
 
       } catch (error) {
@@ -114,8 +133,9 @@ export default function ChartsSection() {
         <PieChartShipments data={shipmentsData} title={"Shipments Breakdown"} />
         <PieChartShipments data={transportsData} title={"Transport Breakdown"} />
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex flex-col gap-5 justify-center">
         <BarChartShipments data={shipments} title={"Shipments Statistic"} />
+        <BarChartShipments data={transports} title={"Transports Statistic"} />
       </div>
     </section>
   );
