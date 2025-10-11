@@ -3,8 +3,6 @@ import { shipmentsTable, shipmentStatus } from "@/drizzle/schemas/shipments";
 
 export default function TablaData({ shipment }: { shipment: typeof shipmentsTable.$inferSelect }) {
 
-  const statusList = shipmentStatus.enumValues;
-
   return (
     <TableRow className={shipment.status === "pending" ? "bg-purple-50" : shipment.status === "in_transit" ? "bg-yellow-50" : shipment.status === "delivered" ? "bg-green-50" : shipment.status === "delayed" ? "bg-red-50" : ""}>
       <TableCell>{shipment.id}</TableCell>

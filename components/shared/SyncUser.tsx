@@ -17,8 +17,6 @@ import { Button } from "@/components/ui/button";
 import { getClientCurrentUser } from "@/lib/auth/client";
 import { User } from "@/lib/validation";
 import { createUser } from "@/lib/users/user";
-import Loader from "@/components/shared/Loader";
-
 
 type SyncData = {
   name: string;

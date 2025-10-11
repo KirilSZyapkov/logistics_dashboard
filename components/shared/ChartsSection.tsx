@@ -119,11 +119,6 @@ export default function ChartsSection() {
     load();
   }, []);
 
-  console.log("chartsSection 122",shipments);
-  console.log("chartsSection 123",shipmentsIncome);
-  console.log("chartsSection 124",transportsSpent);
-  
-
   const inTransit = (Number(shipmentsDataList?.in_transit) / Number(shipmentsDataList?.total)) * 100;
   const inDelayed = (Number(shipmentsDataList?.delayed) / Number(shipmentsDataList?.total)) * 100;
   const inPending = (Number(shipmentsDataList?.pending) / Number(shipmentsDataList?.total)) * 100;

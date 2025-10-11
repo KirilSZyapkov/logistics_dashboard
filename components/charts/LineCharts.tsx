@@ -35,10 +35,7 @@ export default function LineCharts({ shipmetsIncome, transportsSpent, title }: P
   });
 
   const data = Array.from(n, ([month, { Income, Spent }]) => ({ month, Income, Spent }));
-
-  console.log("lineCharts 35",data);
-  
-
+ 
   return (
     <Card className='w-full p-4 rounded-xl shadow-lg bg-white h-96'>
       <h2 className='text-lg font-semibold mb-4'>{title}</h2>

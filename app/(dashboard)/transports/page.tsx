@@ -51,7 +51,6 @@ export default function TransportsPage() {
       return;
     };
     const updatedStatusTransport = await response.json();
-    console.log("transports 53", updatedStatusTransport);
     await updateShipment(updatedStatusTransport.shipmentId, updatedStatusTransport, status);
   };
 

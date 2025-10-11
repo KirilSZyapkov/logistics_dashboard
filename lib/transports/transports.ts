@@ -52,7 +52,6 @@ export async function updateTransport(id: string, status: string) {
   };
 
   const statusUpdatedTransport: typeof transportsTable = await response.json();
-  console.log("lib/transports 54",statusUpdatedTransport);
   
   return NextResponse.json(statusUpdatedTransport, { status: 200 });
 }

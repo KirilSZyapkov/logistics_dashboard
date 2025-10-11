@@ -10,9 +10,6 @@ export default async function KpiCardsList() {
   const shipmentsData = await resShipments.json();
   const transportsData = await resTransports.json();
 
-  console.log("KpiCardsList 8", shipmentsData);
-  console.log("KpiCardsList 9", transportsData);
-
   return (
     <div className="flex items-center w-full flex-col p-5 gap-10">
       <ShipmentsCard shipmentsData={shipmentsData} />

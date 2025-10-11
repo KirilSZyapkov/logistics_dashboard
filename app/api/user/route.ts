@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     .from(userTables)
     .where(eq(userTables.clerkId, userId));
 
-  console.log("api/user 20", currUser);
+
   if (!currUser) {
     return NextResponse.json(null, { status: 200 }); // връщаме null ако няма
   }
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     role,
     organization
   };
-  
+
   const parsed = userSchema.safeParse(newUserData);
   if (!parsed.success) {
     const errors = parsed.error.errors.map((err) => err.message);

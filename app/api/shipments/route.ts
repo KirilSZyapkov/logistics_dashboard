@@ -46,8 +46,6 @@ export async function PUT(req: NextRequest) {
   const selectedOrder = body.selectedOrder;
   const data = body.data;
   const status = body.status;
-  console.log("api/shipments 48",selectedOrder );
-  console.log("api/shipments 49",data );
   
   const [updatedShipment] = await db
   .update(shipmentsTable)
