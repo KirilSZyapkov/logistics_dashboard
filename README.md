@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚚 Logistics Dashboard (Concept Project)
 
-## Getting Started
+A **conceptual logistics and transport management dashboard** built with **Next.js 15**, **Drizzle ORM**, **Neon PostgreSQL**, **Clerk authentication**, and **ShadCN UI**.  
+This project represents an **early-stage prototype** designed to explore architecture, data modeling, and UI/UX for a real-world logistics platform.
 
-First, run the development server:
+---
 
-```bash
+## 🧭 Overview
+
+The **Logistics Dashboard Concept** demonstrates how modern web technologies can streamline logistics operations and data visualization.  
+Although not a production system, it provides a **solid foundation** that can be further developed into a complete logistics management tool.
+
+This version focuses on:
+- Managing **shipments** and **transports**
+- Tracking shipment statuses (`pending`, `in_transit`, `delayed`, `delivered`)
+- Role-based access for team members and leaders
+- Real-time-like dashboards with tables and charts
+
+---
+
+## ⚙️ Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| **Frontend** | [Next.js 15](https://nextjs.org/) |
+| **UI Components** | [ShadCN UI](https://ui.shadcn.com/) + Tailwind CSS |
+| **Database** | [Neon PostgreSQL](https://neon.tech/) |
+| **ORM** | [Drizzle ORM](https://orm.drizzle.team/) |
+| **Auth** | [Clerk](https://clerk.com/) |
+| **Charts** | [Recharts](https://recharts.org/) |
+| **Deployment** | Vercel / Neon Cloud |
+
+---
+
+## 🚀 Concept Goals
+
+✅ **Demonstrate modern full-stack architecture**  
+✅ **Show how logistics data can be visualized interactively**  
+✅ **Explore KPI card design and real-time analytics**  
+✅ **Prototype user roles (Admin / Team Leader / Employee)**  
+✅ **Build a scalable foundation for future product development**
+
+---
+
+## 🧩 Project Structure
+/app
+/dashboard
+/components
+/charts
+/api
+/shipments
+/transports
+/lib
+/drizzle
+/hooks
+/services
+
+
+---
+## 🧠 Getting Started (Local Development)
+
+### 1️⃣ Clone the repository
+git clone https://github.com/<your-username>/logistics-dashboard.git
+cd logistics-dashboard
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Set up environment variables
+Create a .env.local file:
+NEXT_PUBLIC_URL=http://localhost:3000
+DATABASE_URL=your_neon_postgres_connection_url
+CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+
+4️⃣ Run database migrations
+npx drizzle-kit push
+
+5️⃣ Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📊 Dashboard Features (Concept Stage)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Shipments tracking by status and creation date
+Transports management with assigned shipments
+KPI cards summarizing total, delayed, and active shipments
+Interactive charts showing revenue and transport performance
+Role-based views for admins, team leaders, and employees
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📈 Visualization
 
-## Learn More
+The dashboard concept includes:
+  Bar charts for revenue vs. expenses trends
+  Line charts for monthly shipment performance
+  Pie charts for shipment status distribution
+  Data tables with sorting and filters
 
-To learn more about Next.js, take a look at the following resources:
+🛠 Future Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is a proof of concept (PoC) and can be expanded to include:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔁 Real-time updates via WebSockets
+📱 Mobile-friendly views
+📬 Notifications for delayed shipments
+💾 Historical analytics with caching
+🌍 Integration with third-party APIs (DHL, FedEx, etc.)
+🧠 AI-powered route or cost optimization
+📜 License
 
-## Deploy on Vercel
+This project is licensed under the MIT License.
+You’re free to use, modify, and build upon it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🌍 Author
+Developed by: Kiril Zyapkov
+📧 Contact: appdeveloperjs47@gmail.com
+💼 GitHub: github.com/KirilSZyapkov
