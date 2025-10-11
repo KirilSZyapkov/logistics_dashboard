@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { shipmentSchema, Shipment } from "@/lib/validation";
+import { shipmentSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,13 +60,13 @@ export default function CreateShipmentPage() {
       if (values.clientName === "" || values.price === "" || values.loadingFrom === "" || values.deliveryTo === "" || values.loadingDate === "" || values.deliveryDate === "") {
         throw new Error("Please fill in all fields.");
       };
-      const response = await createShipment(values);
+      await createShipment(values);
       alert("Shipment created successfully!");
       form.reset();
       setIsLoading(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error creating shipment:", error);
-      alert(error.message);
+      alert(error instanceof Error ? error.message : "An unexpected error occurred.");
       setIsLoading(false);
       return;
 

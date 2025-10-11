@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 };
 
 export function mapingDateToYYYYMM(date: typeof shipmentsTable.$inferSelect[]) {
-  let mapedDate = new Map();
+  const mapedDate = new Map();
 
   if (Array.isArray(date)) {
     date.forEach((item) => {
@@ -30,7 +30,7 @@ export function mapingDateToYYYYMM(date: typeof shipmentsTable.$inferSelect[]) {
 };
 
 export function mapingIncome(date: typeof shipmentsTable.$inferSelect[]) {
-  let mapedDate = new Map();
+  const mapedDate = new Map();
 
   if (Array.isArray(date)) {
     date.forEach((item) => {
@@ -48,7 +48,7 @@ export function mapingIncome(date: typeof shipmentsTable.$inferSelect[]) {
 };
 
 export function mapingSpent(date: typeof transportsTable.$inferSelect[]) {
-  let mapedDate = new Map();
+  const mapedDate = new Map();
 
   if (Array.isArray(date)) {
     date.forEach((item) => {

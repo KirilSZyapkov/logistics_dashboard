@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { shipmentsTable, shipmentStatus } from "@/drizzle/schemas/shipments";
+import { shipmentsTable } from "@/drizzle/schemas/shipments";
 
 export default function TablaData({ shipment }: { shipment: typeof shipmentsTable.$inferSelect }) {
 

@@ -19,7 +19,7 @@ export async function getAllTransports() {
   return NextResponse.json(data, { status: 200 });
 }
 
-export async function getTransportById(id: string) { }
+export async function getTransportById() { }
 
 export async function createTransport(data: newTransport) {
   const response = await fetch("/api/transports", {
@@ -55,5 +55,5 @@ export async function updateTransport(id: string, status: string) {
   
   return NextResponse.json(statusUpdatedTransport, { status: 200 });
 }
-export async function deleteTransport(id: string) { }
-export async function getAllTransportsByUserId(userId: string) { }
+export async function deleteTransport() { }
+export async function getAllTransportsByUserId() { }

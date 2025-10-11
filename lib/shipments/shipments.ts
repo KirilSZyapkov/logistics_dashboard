@@ -23,7 +23,7 @@ export async function getAllShipments() {
   return NextResponse.json(data, { status: 200 });
 }
 
-export async function getShipmentById(id: string) { }
+export async function getShipmentById() { }
 
 export async function getAllNotPlannedShipments() {
  const response = await fetch('/api/shipments/list', {
@@ -73,6 +73,6 @@ export async function updateShipment(selectedOrder: string, data: Partial<typeof
   return NextResponse.json(updatedShipment, { status: 200 });
 }
 
-export async function deleteShipment(id: string) { }
+export async function deleteShipment() { }
 
-export async function getShipmentsByUserId(userId: string) { }
+export async function getShipmentsByUserId() { }

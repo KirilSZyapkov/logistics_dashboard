@@ -121,9 +121,9 @@ export default function CreateTransportPage() {
       form.reset();
       setSelectedOrder("");
       setIsLoading(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error creating shipment:", error);
-      alert(error.message);
+      alert(error instanceof Error ? error.message : "An unexpected error occurred.");
       setIsLoading(false);
       return;
 
