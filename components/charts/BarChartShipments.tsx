@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card } from '../ui/card';
 
@@ -11,14 +11,22 @@ type Props = {
   title: string;
 };
 
-const monthTickFormatter = (tick) => {
+interface TickProps {
+  x: number;
+  y: number;
+  payload: { value: string; offset: number };
+  width: number;
+  visibleTicksCount: number;
+}
+
+const monthTickFormatter = (tick: string) => {
   const date = new Date(tick);
   const val = date.getMonth() + 1;
 
   return val.toLocaleString();
 };
 
-const renderQuarterTick = (tickProps) => {
+const renderQuarterTick = (tickProps: TickProps): React.ReactElement<SVGAElement> => {
   const { x, y, payload, width, visibleTicksCount } = tickProps;
   const { value, offset } = payload;
   const date = new Date(value);
@@ -37,7 +45,7 @@ const renderQuarterTick = (tickProps) => {
 
     return <path d={`M${pathX},${y - 4}v${-35}`} stroke="red" />;
   }
-  return undefined;
+  return <g />;
 };
 
 export default function BarChartShipments({ data, title }: Props) {
