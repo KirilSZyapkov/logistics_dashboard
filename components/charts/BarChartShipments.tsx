@@ -37,7 +37,7 @@ const renderQuarterTick = (tickProps) => {
 
     return <path d={`M${pathX},${y - 4}v${-35}`} stroke="red" />;
   }
-  return null;
+  return undefined;
 };
 
 export default function BarChartShipments({ data, title }: Props) {

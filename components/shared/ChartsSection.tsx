@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 
 import PieChartShipments from "../charts/PieChartShipments";
 import BarChartShipments from "../charts/BarChartShipments";
+import LineCharts from "../charts/LineCharts";
 import { getAllShipments } from "@/lib/shipments/shipments";
-import { mapingDateToYYYYMM } from "@/lib/utils";
+import { mapingDateToYYYYMM, mapingIncome, mapingSpent } from "@/lib/utils";
 import { getAllTransports } from "@/lib/transports/transports";
 
 export type ShipmentsDataList = {
@@ -37,11 +38,23 @@ type TransportsData = {
   Delayed: number;
 };
 
+type ShipmentsIncome = {
+  month: string;
+  Income: number;
+};
+
+type TransportsSpent = {
+  month: string;
+  Spent: number;
+};
+
 export default function ChartsSection() {
   const [shipmentsDataList, setShipmentsDataList] = useState<ShipmentsDataList>();
   const [transportsDataList, setTransportsDataList] = useState<TransportsDataList>();
   const [shipments, setShipments] = useState<ShipmentsData[]>([]);
   const [transports, setTransports] = useState<TransportsData[]>([]);
+  const [shipmentsIncome, setShipmentsIncome] = useState<ShipmentsIncome[]>([]);
+  const [transportsSpent, setTransportsSpent] = useState<TransportsSpent[]>([]);
 
   useEffect(() => {
     async function load() {
@@ -83,7 +96,9 @@ export default function ChartsSection() {
         if (responseShipments.status === 200) {
           const data = await responseShipments.json();
           const dataArray = mapingDateToYYYYMM(data);
+          const incomeArray = mapingIncome(data);
           setShipments(dataArray);
+          setShipmentsIncome(incomeArray);
         };
 
         // Fetch transports for BarChart
@@ -91,7 +106,9 @@ export default function ChartsSection() {
         if (responseTransports.status === 200) {
           const data = await responseTransports.json();
           const dataArray = mapingDateToYYYYMM(data);
+          const spentArray = mapingSpent(data);
           setTransports(dataArray);
+          setTransportsSpent(spentArray);
         };
 
       } catch (error) {
@@ -102,7 +119,9 @@ export default function ChartsSection() {
     load();
   }, []);
 
-  console.log("chartsSection 80",shipments);
+  console.log("chartsSection 122",shipments);
+  console.log("chartsSection 123",shipmentsIncome);
+  console.log("chartsSection 124",transportsSpent);
   
 
   const inTransit = (Number(shipmentsDataList?.in_transit) / Number(shipmentsDataList?.total)) * 100;
@@ -136,6 +155,9 @@ export default function ChartsSection() {
       <div className="w-full flex flex-col gap-5 justify-center">
         <BarChartShipments data={shipments} title={"Shipments Statistic"} />
         <BarChartShipments data={transports} title={"Transports Statistic"} />
+      </div>
+      <div className="w-full flex flex-col gap-5 justify-center">
+        <LineCharts shipmetsIncome={shipmentsIncome} transportsSpent={transportsSpent} title={"Incomes and Spent Graphic"} />
       </div>
     </section>
   );
